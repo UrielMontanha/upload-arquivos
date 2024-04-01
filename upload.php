@@ -1,7 +1,7 @@
 <?php
 
 // definiu a pasta de destino
-$pastaDestino = "uploads/";
+$pastaDestino = "/uploads/";
 
 // pegamos o nome do aquivo
 $nomeArquivo = $_FILES['fileToUpload']['name'];
