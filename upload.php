@@ -7,5 +7,9 @@ $pastaDestino = "uploads/";
 $nomeArquivo = $_FILES['fileToUpload']['name'];
 
 var_dump($_FILES['fileToUpload']['name']);
-var_dump($_SERVER);
-file_exists($_SERVER[] . $pastaDestinpo . $nomeArquivo);
+
+// verificar se o arquivo já existe
+file_exists(__DIR__ . $pastaDestinpo . $nomeArquivo);
+
+var_dump(__DIR__ . $pastaDestinpo . $nomeArquivo);
+
