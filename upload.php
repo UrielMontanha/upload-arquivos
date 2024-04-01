@@ -9,7 +9,12 @@ $nomeArquivo = $_FILES['fileToUpload']['name'];
 var_dump($_FILES['fileToUpload']['name']);
 
 // verificar se o arquivo já existe
-file_exists(__DIR__ . $pastaDestinpo . $nomeArquivo);
+if (file_exists(__DIR__ . $pastaDestinpo . $nomeArquivo)) 
+{
+    echo "Arquivo já existe!";
+    exit;
+}
 
 var_dump(__DIR__ . $pastaDestinpo . $nomeArquivo);
 
+?>
