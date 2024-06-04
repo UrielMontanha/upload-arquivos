@@ -11,7 +11,7 @@
 
     <form action="upload.php" method="post" enctype="multipart/form-data">
         Selecione o arquivo:
-        <input type="file" name="fileToUpload" id="fileToUpload"> 
+        <input type="file" name="" id="fileToUpload"> 
         <input type="submit" value="Enviar" name="submit">
     </form>
 
