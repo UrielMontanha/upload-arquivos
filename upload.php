@@ -17,22 +17,23 @@ var_dump(pathinfo($_FILES['arquivo']['name'], PATHINFO_EXTENSION));
 
 $extensao = pathinfo($_FILES['arquivo']['name'], PATHINFO_EXTENSION);
 
-if ($extensao != "png" AND $extensao != "jpg" && $extensao != "jpeg" && $extensao != "gif" && $extensao != "jfif" && $extensao != "svg") {
+if ($extensao != "png" && $extensao != "jpg" && $extensao != "jpeg" && $extensao != "gif" && $extensao != "jfif" && $extensao != "svg") {
     echo "O arquivo não é uma imagem! Apenas selecione arquivos com extenção png, jpg, jpeg, gif, jfif ou svg";
     die();
 }
 
 
 
-if (getimagezise($_FILES['arquivo']['tmp_name']) === false)
+if (getimagesize($_FILES['arquivo']['tmp_name']) === false)
 {
     echo "Problemas ao enviar a imagem. Tente novamente.";
     die();
 }
 
-$fezUpload = move_uploaded_file($_FILES['arquivo']['tmp_name'], $pastaDestino . $_FILES['arquivo']['NAME']);
+var_dump( __DIR__ . $pastaDestino . $_FILES['arquivo']['name']);
+$fezUpload = move_uploaded_file($_FILES['arquivo']['tmp_name'], __DIR__ . $pastaDestino . $_FILES['arquivo']['name']);
 
-IF($fezUpload == true)
+if($fezUpload == true)
 {
     header("Location:index.php");
 } else {
