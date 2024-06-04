@@ -12,10 +12,9 @@ if ($_FILES['arquivo']['size'] > 2000000)
     die();      
 }
 
-//var_dump($_FILES['arquivo']['name']);
+var_dump($_FILES['arquivo']['name']);
 var_dump(pathinfo($_FILES['arquivo']['name'], PATHINFO_EXTENSION));
-
-$extensao = pathinfo($_FILES['arquivo']['name'], PATHINFO_EXTENSION);
+$extensao = strolower(pathinfo($_FILES['arquivo']['name'], PATHINFO_EXTENSION));
 
 if ($extensao != "png" && $extensao != "jpg" && $extensao != "jpeg" && $extensao != "gif" && $extensao != "jfif" && $extensao != "svg") {
     echo "O arquivo não é uma imagem! Apenas selecione arquivos com extenção png, jpg, jpeg, gif, jfif ou svg";
@@ -30,8 +29,11 @@ if (getimagesize($_FILES['arquivo']['tmp_name']) === false)
     die();
 }
 
+$nomeArquivo = uniqid();
+
+
 var_dump( __DIR__ . $pastaDestino . $_FILES['arquivo']['name']);
-$fezUpload = move_uploaded_file($_FILES['arquivo']['tmp_name'], __DIR__ . $pastaDestino . $_FILES['arquivo']['name']);
+$fezUpload = move_uploaded_file($_FILES['arquivo']['tmp_name'], __DIR__ . $pastaDestino . $nomeArquivo . "." . $extensao);
 
 if($fezUpload == true)
 {
