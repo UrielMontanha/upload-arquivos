@@ -24,7 +24,7 @@ if ($extensao != "png" AND $extensao != "jpg" && $extensao != "jpeg" && $extensa
 
 
 
-if (getimagezise($_FILES['fileToUpload']['name']) === false) 
+if (getimagezise($_FILES['fileToUpload']['tmp_name']) === false) 
 {
     echo "Problemas ao enviar a imagem. Tente novamente.";
     die();
