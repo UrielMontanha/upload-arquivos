@@ -29,8 +29,6 @@ if (getimagesize($_FILES['arquivo']['tmp_name']) === false)
     die();
 }
 
-$nomeArquivo = uniqid();
-
 
 var_dump( __DIR__ . $pastaDestino . $_FILES['arquivo']['name']);
 $fezUpload = move_uploaded_file($_FILES['arquivo']['tmp_name'], __DIR__ . $pastaDestino . $nomeArquivo . "." . $extensao);
@@ -42,6 +40,24 @@ if($fezUpload == true)
     echo "Erro ao mover arquivo.";
 }
 
+
+
+$nomeArquivo = uniqid();
+
+$fezUpload = move_upload_file($_FILES['arquivo']['tmp_name'],
+            __DIR__ . $pastaDestino . $nomeArquivo . "." . $extensao);
+if ($fezUpload == true) {
+    $conexao = mysqli_connect("localhost", "root", "", "upload-arquivos");
+    $sql = "INSERT INTO arquivo (nome_arquivo) VALUES ('$nomeArquivo.$extensao')";
+    $resultado = mysqli_query($conexao, $sql);
+    if ($resultado != false) {
+        header("location: index.php");
+    } else {
+        echo "Erro ao registrar o arquivo no banco de dados.";
+    }
+} else {
+    echo "Erro ao mover arquivo";
+}
 
 
 
