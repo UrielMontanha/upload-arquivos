@@ -43,11 +43,11 @@ if ($fezUpload == true) {
         if (isset($_POST['nome_arquivo'])){
             $apagou = unlink(__DIR__ . $pastaDestino . $_POST['nome_arquivo']);
             if ($apagou == true) {
-                $sql - "DELETE FROM arquivo WHERE nome_arquivo='"
+                $sql = "DELETE FROM arquivo WHERE nome_arquivo='"
                 . $_POST['nome_arquivo'] . "'";
                 $resultado2 = mysqli_query($conexao, $sql);
                 if ($resultado2 == false) {
-                    echo "Erro ao apagar o arquivo do banco de dados."
+                    echo "Erro ao apagar o arquivo do banco de dados.";
                     die();
                 }
             } else {

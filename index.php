@@ -40,7 +40,7 @@ if ($resultado != false) {
             <?php
             foreach ($arquivos as $arquivo) {
                 echo "<tr><td>" . $arquivo['nome_arquivo'] . "</td>";
-                echo "<td><a href=''>Alterar</td>";
+                echo "<td><a href='alterar.php?nome_arquivo=" . $arquivo['nome_arquivo'] . "'>Alterar</td>";
                 echo "<td><button>Excluir</button></td></tr>";
             }
             ?>
