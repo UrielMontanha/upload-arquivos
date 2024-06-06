@@ -14,7 +14,8 @@ if ($_FILES['arquivo']['size'] > 2000000)
 
 var_dump($_FILES['arquivo']['name']);
 var_dump(pathinfo($_FILES['arquivo']['name'], PATHINFO_EXTENSION));
-$extensao = strolower(pathinfo($_FILES['arquivo']['name'], PATHINFO_EXTENSION));
+
+$extensao = strtolower(pathinfo($_FILES['arquivo']['name'], PATHINFO_EXTENSION));
 
 if ($extensao != "png" && $extensao != "jpg" && $extensao != "jpeg" && $extensao != "gif" && $extensao != "jfif" && $extensao != "svg") {
     echo "O arquivo não é uma imagem! Apenas selecione arquivos com extenção png, jpg, jpeg, gif, jfif ou svg";
@@ -30,27 +31,30 @@ if (getimagesize($_FILES['arquivo']['tmp_name']) === false)
 }
 
 
-var_dump( __DIR__ . $pastaDestino . $_FILES['arquivo']['name']);
-$fezUpload = move_uploaded_file($_FILES['arquivo']['tmp_name'], __DIR__ . $pastaDestino . $nomeArquivo . "." . $extensao);
-
-if($fezUpload == true)
-{
-    header("Location:index.php");
-} else {
-    echo "Erro ao mover arquivo.";
-}
-
-
-
 $nomeArquivo = uniqid();
 
-$fezUpload = move_upload_file($_FILES['arquivo']['tmp_name'],
+$fezUpload = move_uploaded_file($_FILES['arquivo']['tmp_name'],
             __DIR__ . $pastaDestino . $nomeArquivo . "." . $extensao);
 if ($fezUpload == true) {
-    $conexao = mysqli_connect("localhost", "root", "", "upload-arquivos");
+    $conexao = mysqli_connect("localhost", "root", "", "upload-arquivo");
     $sql = "INSERT INTO arquivo (nome_arquivo) VALUES ('$nomeArquivo.$extensao')";
     $resultado = mysqli_query($conexao, $sql);
     if ($resultado != false) {
+        if (isset($_POST['nome_arquivo'])){
+            $apagou = unlink(__DIR__ . $pastaDestino . $_POST['nome_arquivo']);
+            if ($apagou == true) {
+                $sql - "DELETE FROM arquivo WHERE nome_arquivo='"
+                . $_POST['nome_arquivo'] . "'";
+                $resultado2 = mysqli_query($conexao, $sql);
+                if ($resultado2 == false) {
+                    echo "Erro ao apagar o arquivo do banco de dados."
+                    die();
+                }
+            } else {
+                echo "Erro ao apagar o arquivo antigo.";
+                die();
+            }
+        }
         header("location: index.php");
     } else {
         echo "Erro ao registrar o arquivo no banco de dados.";
