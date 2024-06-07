@@ -23,16 +23,16 @@ if ($resultado != false) {
     <fieldset> <legend> <h2> Upload </h2> </legend>
 
     <form action="upload.php" method="post" enctype="multipart/form-data">
-        Selecione o arquivo:
+        <h2> Selecione o arquivo: 
         <input type="file" name="arquivo"> 
-        <input type="submit" value="Enviar" name="submit">
+        <input type="submit" value="Enviar" name="submit"> </h2>
     </form>
 
     <br><br>
-    <table>
+    <table border="12x"  style="border-color: #084d6e">
         <thead>
             <tr>
-                <th>Nome arquivo</th>
+                <th> Nome arquivo </th>
                 <th cosplan="2"> Opções</th>
             <tr>
         </thead>
