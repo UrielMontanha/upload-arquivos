@@ -65,7 +65,11 @@ if ($resultado != false) {
 
     <script>
         function excluir(nome_arquivo) {
-            confirm("Você tem certeza que deseja excluir o arquivo " + nome_arquivo);
+             let deletar = confirm("Você tem certeza que deseja excluir o arquivo " + nome_arquivo);
+             if (deletar = true)
+             {
+
+             }window.location.href = "deletar.php?nome_arquivo=" + nome_arquivo;
         }
     </script>
 
